@@ -27,7 +27,14 @@ const Clock = () => {
   };
 
   return (
-    <Typography fontSize={60} color='white' textAlign='center' lineHeight={1}>
+    <Typography
+      data-text={formatTime(remainingTime)}
+      className='glitch layers'
+      fontSize={60}
+      color='white'
+      textAlign='center'
+      lineHeight={1}
+    >
       {formatTime(remainingTime)}
     </Typography>
   );
