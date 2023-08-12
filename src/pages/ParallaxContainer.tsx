@@ -1,7 +1,6 @@
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
-import x from 'assets/audio/x.mp3';
 import * as React from 'react';
 import { Intro } from './ContainerComponents/1-Intro';
 import ImageCarousel from './ImageCarousel';
@@ -25,8 +24,6 @@ export const useStyles = makeStyles(() => ({
 
 const ParallaxContainer = () => {
   const parallax = React.useRef<IParallax | null>(null);
-  const styles = useStyles();
-  const audio = new Audio(x);
 
   return (
     <Box bgcolor='#01128e' height='100vh' width='100vw'>
