@@ -1,37 +1,11 @@
-import * as React from 'react';
-import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
-import { Box, Typography, IconButton } from '@mui/material';
-import Clock from './Clock';
-import { ArrowDownward, Speaker } from '@mui/icons-material';
-import { Intro } from './ContainerComponents/1-Intro';
-import { Round } from './ContainerComponents/2-Round';
-import { Repercussion } from './Repercussion';
+import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { IParallax, Parallax, ParallaxLayer } from '@react-spring/parallax';
 import x from 'assets/audio/x.mp3';
+import * as React from 'react';
+import { Intro } from './ContainerComponents/1-Intro';
 import ImageCarousel from './ImageCarousel';
-
-const AudioButton = ({ audio }: { audio: HTMLAudioElement }) => {
-  return (
-    <IconButton
-      sx={{
-        position: 'absolute',
-        top: '5%',
-        left: '50',
-
-        color: 'white',
-      }}
-      onClick={() => {
-        if (audio.paused) {
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      }}
-    >
-      <Speaker fontSize='large' />
-    </IconButton>
-  );
-};
+import { Repercussion } from './Repercussion';
 
 export const useStyles = makeStyles(() => ({
   parallax: {
