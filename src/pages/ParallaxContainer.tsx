@@ -2,67 +2,89 @@ import * as React from 'react';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import { Box, Typography, IconButton } from '@mui/material';
 import Clock from './Clock';
-import { ArrowDownward } from '@mui/icons-material';
+import { ArrowDownward, Speaker } from '@mui/icons-material';
+import { Intro } from './ContainerComponents/1-Intro';
+import { Round } from './ContainerComponents/2-Round';
+import { Repercussion } from './Repercussion';
+import { makeStyles } from '@mui/styles';
+import x from 'assets/audio/x.mp3';
+import ImageCarousel from './ImageCarousel';
 
-const NavButton = ({ onNavDown }: { onNavDown: () => void }) => {
+const AudioButton = ({ audio }: { audio: HTMLAudioElement }) => {
   return (
     <IconButton
       sx={{
         position: 'absolute',
-        bottom: '5%',
-        left: '50%',
-        transform: 'translateX(-50%)',
+        top: '5%',
+        left: '50',
+
         color: 'white',
       }}
-      onClick={onNavDown}
+      onClick={() => {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
+      }}
     >
-      <ArrowDownward fontSize='large' />
+      <Speaker fontSize='large' />
     </IconButton>
   );
 };
 
+export const useStyles = makeStyles(() => ({
+  parallax: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto',
+    width: '80vw',
+  },
+  text: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '0 auto',
+  },
+}));
+
 const ParallaxContainer = () => {
-  const alignCenter = { display: 'flex', alignItems: 'center' };
-  const parallax = React.useRef<IParallax>(null!);
-  const [currentSlide, setCurrentSlide] = React.useState(0);
-  const onNavDown = () => {
-    if (currentSlide < 2) {
-      parallax.current.scrollTo(currentSlide + 1);
-      setCurrentSlide(currentSlide + 1);
-    }
-  };
+  const parallax = React.useRef<IParallax | null>(null);
+  const styles = useStyles();
+  const audio = new Audio(x);
 
   return (
     <Box bgcolor='#01128e' height='100vh' width='100vw'>
-      <Parallax pages={10} ref={parallax}>
+      {/* <AudioButton audio={audio} /> */}
+      <Parallax pages={6.75} ref={parallax}>
+        <Intro />
         <ParallaxLayer
-          offset={0}
-          speed={0.5}
+          sticky={{ start: 0.75, end: 1.35 }}
           style={{
-            ...alignCenter,
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto',
-            flexDirection: 'column',
           }}
         >
           <Typography
-            fontSize={60}
+            className='glitch layers'
             color='white'
+            fontSize={42}
             textAlign='center'
-            lineHeight={1}
-            mb={{
-              xs: 4,
+            ml={{
               md: 0,
             }}
           >
-            ARE YOU READY?
+            FOR ROUND <span>3?</span>
           </Typography>
-          <Clock />
         </ParallaxLayer>
         <ParallaxLayer
-          sticky={{ start: 0.75, end: 1.4 }}
+          sticky={{ start: 1.45, end: 1.7 }}
           style={{
-            ...alignCenter,
+            display: 'flex',
+            alignItems: 'center',
             justifyContent: 'center',
             margin: '0 auto',
           }}
@@ -72,50 +94,141 @@ const ParallaxContainer = () => {
             fontSize={42}
             textAlign='center'
             ml={{
-              xs: '10%',
               md: 0,
             }}
           >
-            ROUND
+            GET READY FOR...
           </Typography>
         </ParallaxLayer>
-
+        <Repercussion />
         <ParallaxLayer
-          speed={0.2}
-          style={{ ...alignCenter, justifyContent: 'flex-start' }}
-          sticky={{ start: 0.9, end: 1.4 }}
+          sticky={{ start: 2.4, end: 2.8 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto',
+          }}
         >
-          <Typography
-            color='white'
-            fontSize={42}
-            textAlign='center'
-            ml={{
-              md: '39%',
-              xs: '15%',
-            }}
-          >
-            FOR
-          </Typography>
+          <Box>
+            <Typography color='white' fontSize={38.5} textAlign='left'>
+              16.09.23
+            </Typography>
+            <Typography
+              color='white'
+              fontSize={42}
+              textAlign='center'
+              lineHeight={0.3}
+            >
+              DEPOT. MAYFIELD
+            </Typography>
+            <Typography
+              color='white'
+              fontSize={52.5}
+              textAlign='center'
+              lineHeight={1.3}
+            >
+              MANCHESTER
+            </Typography>
+          </Box>
         </ParallaxLayer>
         <ParallaxLayer
-          speed={0.4}
-          style={{ ...alignCenter, justifyContent: 'flex-end' }}
-          sticky={{ start: 1.1, end: 1.4 }}
+          sticky={{ start: 3, end: 3.4 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto',
+          }}
         >
-          <Typography
-            color='white'
-            fontSize={42}
-            textAlign='center'
-            mr={{
-              md: '41.5%',
-              xs: '14%',
-            }}
-          >
-            3?
-          </Typography>
+          <Box>
+            <Typography
+              color='white'
+              fontSize={42}
+              textAlign='center'
+              lineHeight={0.3}
+            >
+              WITH SPECIAL
+            </Typography>
+            <Typography
+              color='white'
+              fontSize={55}
+              textAlign='center'
+              lineHeight={1.3}
+            >
+              GUESTS
+            </Typography>
+          </Box>
+        </ParallaxLayer>
+        <ParallaxLayer
+          sticky={{ start: 3.6, end: 4 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto',
+          }}
+        >
+          <Box>
+            <Typography
+              lineHeight={0.6}
+              color='white'
+              fontSize={52}
+              textAlign='center'
+            >
+              SHEA | ADAM
+            </Typography>
+            <Typography color='white' fontSize={42} textAlign='center'>
+              COLLEEN | BILLY
+            </Typography>
+            <Typography
+              color='white'
+              fontSize={28}
+              textAlign='center'
+              lineHeight={0.5}
+            >
+              LAURYN | AHLEM | LUCIE
+            </Typography>
+          </Box>
+        </ParallaxLayer>
+        <ParallaxLayer
+          sticky={{ start: 4.3, end: 5 }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto',
+          }}
+        >
+          <Box>
+            <Typography
+              color='white'
+              fontSize={28}
+              textAlign='center'
+              lineHeight={0.6}
+            >
+              HAPPY BIRTHDAY
+            </Typography>
+            <Typography color='white' fontSize={50} textAlign='center'>
+              THOMAS!
+            </Typography>
+            <Typography color='white' fontSize={22} textAlign='center'>
+              FROM ADAM & SHEA
+            </Typography>
+          </Box>
+        </ParallaxLayer>
+        <ParallaxLayer
+          offset={5.75}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: '0 auto',
+          }}
+        >
+          <ImageCarousel />
         </ParallaxLayer>
       </Parallax>
-      <NavButton onNavDown={onNavDown} />
     </Box>
   );
 };
